@@ -1,9 +1,11 @@
 unit Unit1;
 
+{$MODE Delphi}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  LCLIntf, LCLType, LMessages, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Clipbrd, StdCtrls, ExtCtrls;
 
 type
@@ -12,13 +14,10 @@ type
     Panel1: TPanel;
     Memo1: TMemo;
     Button1: TButton;
-    Button2: TButton;
-    ListBox1: TListBox;
     procedure Panel1Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
   private
     { Private-Deklarationen }
   public
@@ -33,7 +32,7 @@ var
 
 implementation
 
-{$R *.dfm}
+{$R *.lfm}
 
 procedure TForm1.Panel1Click(Sender: TObject);
 begin
@@ -92,13 +91,13 @@ begin
 
   try
 
-    Form1.Height := 92;
+    Form1.Height := 70;
 
-    ShowWindow( Application.Handle, SW_HIDE );
-    SetWindowLong( Application.Handle, GWL_EXSTYLE,
-                   GetWindowLong(Application.Handle, GWL_EXSTYLE) or
+    ShowWindow( Application.MainFormHandle, SW_HIDE );
+    SetWindowLong( Application.MainFormHandle, GWL_EXSTYLE,
+                   GetWindowLong(Application.MainFormHandle, GWL_EXSTYLE) or
                    WS_EX_TOOLWINDOW and not WS_EX_APPWINDOW);
-    ShowWindow( Application.Handle, SW_SHOW );
+    ShowWindow( Application.MainFormHandle, SW_SHOW );
 
   except
 
@@ -113,41 +112,6 @@ begin
   Clipboard.Clear;
 end;
 
-procedure TForm1.Button2Click(Sender: TObject);
-var
-  Data1: THandle;
-  Data2: THandle;
-  Data3: THandle;
-  Data4: THandle;
-begin
-
-  Data1 := Clipboard.GetAsHandle(7);
-
-  Clipboard.Clear;
-
-  Clipboard.SetAsHandle(7,Data1);
-
-{  Clipboard.Clear;
-
-  Clipboard.Open;
-
-  Clipboard.SetAsHandle(1,Data1);
-
-  Clipboard.Clear;
-
-  {FOR I := 0 TO Clipboard.FormatCount-1 DO
-  begin
-
-    IF NOT(Clipboard.Formats[I] = 1) AND NOT(Clipboard.Formats[I] = 13) THEN
-    begin
-      Clipboard.SetAsHandle(Clipboard.Formats[I],Data);
-      Listbox1.Items.Add(INTtoSTR(Clipboard.Formats[I]));
-    end;
-
-  end;}
-
-
-end;
 
 end.
 

@@ -1,7 +1,9 @@
-program Project1;
+program CopyOK;
+
+{$MODE Delphi}
 
 uses
-  Forms,
+  Forms, Interfaces,
   Unit1 in 'Unit1.pas' {Form1};
 
 {$R *.res}
